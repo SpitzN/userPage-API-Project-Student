@@ -2,7 +2,7 @@
 
 class Renderer {
     _renderUsers(user) {
-        // $(".user-container").text("")
+        $(".user-container").empty();
         let source = $("#user-template").html()
         let template = Handlebars.compile(source)
         let newHTML = template(user)
@@ -11,37 +11,44 @@ class Renderer {
     }
 
     _renderFriends(friends) {
+        $(".friends-container").empty();
         let source = $("#user-friends-template").html()
         let template = Handlebars.compile(source)
         let newHTML = template({friends})
         $(".friends-container").append(newHTML)
     }
 
-    _renderQuote(quoteInfo) {
+    _renderQuote(quote) {
+        $(".quote-container").empty();
         let source = $("#quote-template").html()
         let template = Handlebars.compile(source)
-        let newHTML = template(quoteInfo)
-        $("#quote-template").append(newHTML)
+        let newHTML = template(quote)
+        $(".quote-container").append(newHTML)
     }
 
-    _renderPokemon(pokemonInfo) {
+    _renderPokemon(pokemon) {
+        $(".pokemon-container").empty();
         let source = $("#pokemon-template").html()
         let template = Handlebars.compile(source)
-        let newHTML = template(pokemonInfo)
-        $(".pokemon-image").append(newHTML)
+        let newHTML = template(pokemon)
+        $(".pokemon-container").append(newHTML)
     }
 
-    _renderMeat(meatText) {
+    _renderMeat(meat) {
+        $(".meat-container").empty();
         let source = $("#meat-template").html()
         let template = Handlebars.compile(source)
-        let newHTML = template(meatText)
-        $(".meat-text").append(newHTML)
+        let newHTML = template(meat)
+        $(".meat-container").append(newHTML)
     }
 
     render(data){
         //invokes all the individual _render methods
         this._renderUsers(data.user)
         this._renderFriends(data.friends)
+        this._renderPokemon(data.pokemon)
+        this._renderMeat(data.meat)
+        this._renderQuote(data.quote)
     }
 }
 

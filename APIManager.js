@@ -13,7 +13,6 @@ class APIManager {
             url: 'https://randomuser.me/api/?results=7',
             dataType: 'json',
             success: (result) => {
-                console.log(result)
                 this.data.user = {
                     picture: result.results[0].picture.medium,
                     first: result.results[0].name.first,
@@ -27,28 +26,37 @@ class APIManager {
             }
         });
 
-        $.get("https://pokeapi.co/api/v2/pokemon/1",
+        const randomNumber = (Math.random() * 100).toFixed(0)
+
+        $.get(`https://pokeapi.co/api/v2/pokemon/1${randomNumber}`,
             (result) => {
-                console.log(result)
+                this.data.pokemon = {
+                    name: result.name,
+                    picture: result.sprites.front_default
+                }
+                console.log(this.data.pokemon)
             }
         );
 
+        $.get("https://quotes.rest/qod.json",
+            result => {
+                this.data.quote = {
+                    quote: result.contents.quotes[0].quote,
+                    author: result.contents.quotes[0].author
+                }
+                console.log(this.data.quote)
+            }
+        )
 
-        
-        // $.get("https://quotes.rest/qod", 
-        //         (quotes) => {
-        //         this.data.quotes = quotes
-        //         console.log(quotes)
-        //     }
-        // );
-
-        // $.get("https://baconipsum.com/api/?type=meat-and-filler"),
-        // (bacons) => {
-        //     this.data.bacons = bacons
-
-        // }
+        $.get("https://baconipsum.com/api/?type=meat-and-filler",
+            (result) => {
+                this.data.meat = result[0]
+                console.log(this.data.meat)
+            })
     }
 }
+
+
 
 
 
